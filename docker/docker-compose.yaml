@@ -217,25 +217,6 @@ services:
     networks:
       - default
       - dokploy-network
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=dokploy-network
-      # HTTP router
-      - traefik.http.routers.dify-http.rule=Host(`dify.nextscholar.site`)
-      - traefik.http.routers.dify-http.entrypoints=web
-      - traefik.http.routers.dify-http.middlewares=redirect-to-https
-      # HTTPS router
-      - traefik.http.routers.dify-https.rule=Host(`dify.nextscholar.site`)
-      - traefik.http.routers.dify-https.entrypoints=websecure
-      - traefik.http.routers.dify-https.tls=true
-      - traefik.http.routers.dify-https.tls.certresolver=letsencrypt
-      - traefik.http.routers.dify-https.service=dify-service
-      # Service
-      - traefik.http.services.dify-service.loadbalancer.server.port=3000
-      # Redirect middleware
-      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
-      - traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true
-
   # Postgres database
   db:
     image: postgres:15-alpine
