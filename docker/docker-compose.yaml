@@ -372,6 +372,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - default
 
   # SSRF proxy server
   ssrf_proxy:
